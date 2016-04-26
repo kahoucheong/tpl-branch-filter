@@ -1,3 +1,9 @@
 .branch{
     cursor: pointer;
 }
+
+.branches.wireless-show .wireless-no { display: none; }
+.branches.wireless-hide .wireless-yes { display: none; }
+
+.branches.wheelchair-show .wheelchair-no { display: none; }
+.branches.wheelchair-hide .wheelchair-yes { display: none; }

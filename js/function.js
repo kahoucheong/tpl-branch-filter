@@ -7,9 +7,13 @@ $(document).ready(function(){
         var branches = Object.keys(data);
 
         var listing = branches.reduce(function(previousValue, currentValue, currentIndex, array){
-            return previousValue + "<li class='branch'>" + currentValue + " - <em>" + data[currentValue].address[0] + "</em>" +
+            var branchClasses = "branch";
+            branchClasses += data[currentValue].accessibility.wheelchair ? " wheelchair-yes" : " wheelchair-no";
+            branchClasses += data[currentValue].accessibility.wireless ? " wireless-yes" : " wireless-no";
+
+            return previousValue + "<li class='" + branchClasses + "'>" + currentValue + " - <em>" + data[currentValue].address[0] + "</em>" +
                 "<ul class='branchDetail'>" +
-                "<li class=' wheelchair Wheelchair" + "" + (data[currentValue].accessibility.wheelchair ? "Yes" : "No") + "'>Wheelchair: " + (data[currentValue].accessibility.wheelchair ? "Yes" : "No") + "</li>" +
+                "<li>Wheelchair: " + (data[currentValue].accessibility.wheelchair ? "Yes" : "No") + "</li>" +
                 "<li>Wireless: " + (data[currentValue].accessibility.wireless ? "Yes" : "No") + "</li>" +
                 "<li>Telephone: " + data[currentValue].phone_number + "</li>" +
                 "<li>URL: <a href='" + data[currentValue].url + "'target='_blank'>" + data[currentValue].url + "</a></li>" +
@@ -23,27 +27,21 @@ $(document).ready(function(){
         $(".branchDetail").hide();
         $(".branch").click(function(){
             $(this).find(".branchDetail").toggle();
-        })
-
+        });
 
         /**$.each(data, function (index, branch) {
             console.log(branch.accessibility.wheelchair);
         })**/
 
         $("#filter :checkbox").click(function () {
+            var value = $(this).val();
             if($(this).is(":checked")){
-                $("#filter :checkbox:checked").each(function(){
-                    $("." + $(this).val()).parent().parent(".branch").show();
-                })
+                $(".branches").removeClass(value + "-hide");
+                $(".branches").addClass(value + "-show");
             } else {
-                $("#filter :checkbox").each(function(){
-                    $("." + $(this).val()).parent().parent(".branch").hide();
-                })
+                $(".branches").addClass(value + "-hide");
+                $(".branches").removeClass(value + "-show");
             }
-
-
-
-
 
         });
 
