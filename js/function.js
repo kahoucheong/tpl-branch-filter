@@ -7,12 +7,35 @@ $(document).ready(function(){
         var branches = Object.keys(data);
 
         var listing = branches.reduce(function(previousValue, currentValue, currentIndex, array){
-            return previousValue + "<li class='branch'>" + currentValue + " - <em>" + data[currentValue].address[0] + "</em>" +
+
+            var branchClasses = "branch";
+            branchClasses += data[currentValue].accessibility.wheelchair ? " wheelchair-yes" : " wheelchair-no";
+            branchClasses += data[currentValue].accessibility.wireless ? " wireless-yes" : " wireless-no";
+            branchClasses += (typeof data[currentValue].hours.Monday == "object") ? " monday-open" : " monday-close";
+            branchClasses += (typeof data[currentValue].hours.Tuesday == "object") ? " tuesday-open" : " tuesday-close";
+            branchClasses += (typeof data[currentValue].hours.Wednesday == "object") ? " wednesday-open" : " wednesday-close";
+            branchClasses += (typeof data[currentValue].hours.Thursday == "object") ? " thursday-open" : " thursday-close";
+            branchClasses += (typeof data[currentValue].hours.Friday == "object") ? " friday-open" : " friday-close";
+            branchClasses += (typeof data[currentValue].hours.Saturday == "object") ? " saturday-open" : " saturday-close";
+            branchClasses += (typeof data[currentValue].hours.Sunday == "object") ? " sunday-open" : " sunday-close";
+
+            return previousValue + "<li class='" + branchClasses + "'>" + currentValue + " - <em>" + data[currentValue].address[0] + "</em>" +
                 "<ul class='branchDetail'>" +
-                "<li class=' wheelchair Wheelchair" + "" + (data[currentValue].accessibility.wheelchair ? "Yes" : "No") + "'>Wheelchair: " + (data[currentValue].accessibility.wheelchair ? "Yes" : "No") + "</li>" +
-                "<li>Wireless: " + (data[currentValue].accessibility.wireless ? "Yes" : "No") + "</li>" +
-                "<li>Telephone: " + data[currentValue].phone_number + "</li>" +
-                "<li>URL: <a href='" + data[currentValue].url + "'target='_blank'>" + data[currentValue].url + "</a></li>" +
+                    "<li class='hours'> Hours:" +
+                        "<ul>" +
+                            "<li>Monday: Opening - " + data[currentValue].hours.Monday.opening + " Closing - " + data[currentValue].hours.Monday.closing + "</li>" + 
+                            "<li>Tuesday: Opening - " + data[currentValue].hours.Tuesday.opening + " Closing - " + data[currentValue].hours.Tuesday.closing + "</li>" +
+                            "<li>Wednesday: Opening - " + data[currentValue].hours.Wednesday.opening + " Closing - " + data[currentValue].hours.Wednesday.closing + "</li>" +
+                            "<li>Thursday: Opening - " + data[currentValue].hours.Thursday.opening + " Closing - " + data[currentValue].hours.Thursday.closing + "</li>" +
+                            "<li>Friday: Opening - " + data[currentValue].hours.Friday.opening + " Closing - " + data[currentValue].hours.Friday.closing + "</li>" +
+                            "<li>Saturday: Opening - " + data[currentValue].hours.Saturday.opening + " Closing - " + data[currentValue].hours.Saturday.closing + "</li>" +
+                            "<li>Sunday: Opening - " + data[currentValue].hours.Sunday.opening + " Closing - " + data[currentValue].hours.Sunday.closing + "</li>" +
+                        "</ul>" +
+                    "</li>" +
+                    "<li>Wheelchair: " + (data[currentValue].accessibility.wheelchair ? "Yes" : "No") + "</li>" +
+                    "<li>Wireless: " + (data[currentValue].accessibility.wireless ? "Yes" : "No") + "</li>" +
+                    "<li>Telephone: " + data[currentValue].phone_number + "</li>" +
+                    "<li>URL: <a href='" + data[currentValue].url + "'target='_blank'>" + data[currentValue].url + "</a></li>" +
                 "</ul>" +
                 "</li>";
         }, "");
@@ -26,27 +49,24 @@ $(document).ready(function(){
         })
 
 
-        /**$.each(data, function (index, branch) {
-            console.log(branch.accessibility.wheelchair);
-        })**/
-
+        /**filters**/
         $("#filter :checkbox").click(function () {
+            var value = $(this).val();
             if($(this).is(":checked")){
-                $("#filter :checkbox:checked").each(function(){
-                    $("." + $(this).val()).parent().parent(".branch").show();
-                })
+                $(".branches").removeClass(value + "-hide");
+                $(".branches").addClass(value + "-show");
             } else {
-                $("#filter :checkbox").each(function(){
-                    $("." + $(this).val()).parent().parent(".branch").hide();
-                })
+                $(".branches").addClass(value + "-hide");
+                $(".branches").removeClass(value + "-show");
             }
-
-
-
-
-
         });
 
+        $.each(data, function(index, branch){
+            if (typeof branch.hours.Monday == "object"){
+                console.log("it is an object");
+            }
+
+        })
 
     }).success(function() {
         console.log("Successfully retrieved data.");
