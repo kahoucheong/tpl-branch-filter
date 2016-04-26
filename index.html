@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Toronto Public Library Branch Information">
+    <meta name="author" content="Ka Hou (Michael) Cheong">
+    <title>Toronto Public Library Branch Information</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Toronto Public Library Branches Infomation</h1>
+            <h2>Branches:</h2>
+            <h4>Accessibility:</h4>
+            <div id="filter">
+                <input type="checkbox" name="Wheelchair" value="WheelchairYes"> Wheelchair
+                <input type="checkbox" name="Wireless" value="Yes"> Wireless
+            <h4>Opening days:</h4>
+                <input type="checkbox" name="Monday" value="opening"> Monday
+                <input type="checkbox" name="Tuesday" value="opening"> Tuesday
+                <input type="checkbox" name="Wednesday" value="opening"> Wednesday
+                <input type="checkbox" name="Thursday" value="opening"> Thursday
+                <input type="checkbox" name="Friday" value="opening"> Friday
+                <input type="checkbox" name="Saturday" value="opening"> Saturday
+                <input type="checkbox" name="Sunday" value="opening"> Sunday
+            </div>
+            <br>
+            <hr>
+            <br>
+            <ul class="branches"></ul>
+        </div>
+    </div>
+
+
+    <!--JavaScripts-->
+    <script src="js/jquery-1.12.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/function.js"></script>
+</body>
+</html>
