@@ -21,7 +21,7 @@ $(document).ready(function(){
 
             return previousValue + "<li class='" + branchClasses + "'>" + currentValue + " - <em>" + data[currentValue].address[0] + "</em>" +
                 "<ul class='branchDetail'>" +
-                    "<li class='hours'> Hours:" +
+                    "<li class='hours'> Hours: - " + "Note: " + data[currentValue].hours.note +
                         "<ul>" +
                             "<li>Monday: Opening - " + data[currentValue].hours.Monday.opening + " Closing - " + data[currentValue].hours.Monday.closing + "</li>" + 
                             "<li>Tuesday: Opening - " + data[currentValue].hours.Tuesday.opening + " Closing - " + data[currentValue].hours.Tuesday.closing + "</li>" +
@@ -53,10 +53,10 @@ $(document).ready(function(){
         $("#filter :checkbox").click(function () {
             var value = $(this).val();
             if($(this).is(":checked")){
-                $(".branches").removeClass(value + "-hide");
+                /*$(".branches").removeClass(value + "-hide");*/
                 $(".branches").addClass(value + "-show");
             } else {
-                $(".branches").addClass(value + "-hide");
+                /*$(".branches").addClass(value + "-hide");*/
                 $(".branches").removeClass(value + "-show");
             }
         });

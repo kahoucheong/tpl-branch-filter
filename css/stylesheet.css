@@ -2,59 +2,59 @@
     cursor: pointer;
 }
 .hours{
-    display: none;
+    /*display: none;*/
 }
 .branches.wheelchair-show .wheelchair-no {
     display: none;
 }
-.branches.wheelchair-hide .wheelchair-yes {
+/*.branches.wheelchair-hide .wheelchair-yes {
     display: none;
-}
+}*/
 .branches.wireless-show .wireless-no {
     display: none;
 }
-.branches.wireless-hide .wireless-yes {
+/*.branches.wireless-hide .wireless-yes {
     display: none;
-}
+}*/
 .branches.monday-show .monday-close{
     display: none;
 }
-.branches.monday-hide .monday-open{
+/*.branches.monday-hide .monday-open{
     display: none;
-}
+}*/
 .branches.tuesday-show .tuesday-close{
      display: none;
  }
-.branches.tuesday-hide .tuesday-open{
+/*.branches.tuesday-hide .tuesday-open{
     display: none;
-}
+}*/
 .branches.wednesday-show .wednesday-close{
     display: none;
 }
-.branches.wednesday-hide .wednesday-open{
+/*.branches.wednesday-hide .wednesday-open{
     display: none;
-}
+}*/
 .branches.thursday-show .thursday-close{
     display: none;
 }
-.branches.thursday-hide .thursday-open{
+/*.branches.thursday-hide .thursday-open{
     display: none;
-}
+}*/
 .branches.friday-show .friday-close{
     display: none;
 }
-.branches.friday-hide .friday-open{
+/*.branches.friday-hide .friday-open{
     display: none;
-}
+}*/
 .branches.saturday-show .saturday-close{
     display: none;
 }
-.branches.saturday-hide .saturday-open{
+/*.branches.saturday-hide .saturday-open{
     display: none;
-}
+}*/
 .branches.sunday-show .sunday-close{
     display: none;
 }
-.branches.sunday-hide .sunday-open{
+/*.branches.sunday-hide .sunday-open{
     display: none;
-}
+}*/
