@@ -23,7 +23,7 @@ $(document).ready(function(){
                 "<ul class='branchDetail'>" +
                     "<li class='hours'> Hours: - " + "Note: " + data[currentValue].hours.note +
                         "<ul>" +
-                            "<li>Monday: Opening - " + data[currentValue].hours.Monday.opening + " Closing - " + data[currentValue].hours.Monday.closing + "</li>" + 
+                            "<li>Monday: Opening - " + data[currentValue].hours.Monday.opening + " Closing - " + data[currentValue].hours.Monday.closing + "</li>" +
                             "<li>Tuesday: Opening - " + data[currentValue].hours.Tuesday.opening + " Closing - " + data[currentValue].hours.Tuesday.closing + "</li>" +
                             "<li>Wednesday: Opening - " + data[currentValue].hours.Wednesday.opening + " Closing - " + data[currentValue].hours.Wednesday.closing + "</li>" +
                             "<li>Thursday: Opening - " + data[currentValue].hours.Thursday.opening + " Closing - " + data[currentValue].hours.Thursday.closing + "</li>" +

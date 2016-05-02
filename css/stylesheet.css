@@ -1,9 +1,36 @@
+body {
+    font-family: "Lato", "Open Sans", "Roboto", sans-serif;
+}
+/**header**/
+.header{
+    background-color: #FE4365;
+    color: #FFFFFF;;
+}
+h1,
+h2{
+    text-align: center;
+}
+.fa span{
+    font-family: "Lato", "Open Sans", "Roboto", sans-serif;
+}
+@media screen and (max-width: 435px){
+    .header .container{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+
+/**branches info**/
 .branch{
     cursor: pointer;
 }
-.hours{
-    /*display: none;*/
+.branchDetail{
+    border-left: 3px solid #FE4365;
+    padding-left: 30px;
 }
+
+/**filter css**/
 .branches.wheelchair-show .wheelchair-no {
     display: none;
 }
@@ -59,6 +86,7 @@
     display: none;
 }*/
 
+/**toggle icon**/
 .onoffswitch {
     position: relative;
     width: 50px;
@@ -66,7 +94,7 @@
     -moz-user-select:none;
     -ms-user-select: none;
     display: inline-block;
-    margin-right: 40px;
+    margin-right: 50px;
 }
 .onoffswitch-checkbox {
     display: none;
@@ -89,7 +117,7 @@
     width: 18px;
     height: 18px;
     margin: 0px;
-    background: #FFFFFF;
+    background: #FF0066;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -99,15 +127,12 @@
     transition: all 0.3s ease-in 0s;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label {
-    background-color: #49E845;
+    background-color: #FFFFFF;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
-    border-color: #49E845;
+    border-color: #FF0066;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label:before {
     right: 0px;
 }
-.onoffswitch span{
-    position: relative;
-    display: inline-block;
-}
+
