@@ -13,8 +13,9 @@ h2{
 .fa span{
     font-family: "Lato", "Open Sans", "Roboto", sans-serif;
 }
-@media screen and (max-width: 435px){
-    .header .container{
+@media screen and (max-width: 768px){
+    .header .container,
+    .details .container{
         margin-left: 10px;
         margin-right: 10px;
     }
@@ -22,6 +23,12 @@ h2{
 
 
 /**branches info**/
+.number-branches{
+    font-size: 20px;
+}
+.number-visible{
+    font-weight: bold;
+}
 .branch{
     cursor: pointer;
 }

@@ -21,15 +21,15 @@ $(document).ready(function(){
 
             return previousValue + "<li class='" + branchClasses + "'>" + currentValue + " - <em>" + data[currentValue].address[0] + "</em>" +
                 "<ul class='branchDetail'>" +
-                    "<li class='hours'> Hours: - " + "Note: " + data[currentValue].hours.note +
+                    "<li class='hours'> Hours: - " + "Note: " + (data[currentValue].hours.note != null ? data[currentValue].hours.note : "N/A") +
                         "<ul>" +
-                            "<li>Monday: Opening - " + data[currentValue].hours.Monday.opening + " Closing - " + data[currentValue].hours.Monday.closing + "</li>" +
-                            "<li>Tuesday: Opening - " + data[currentValue].hours.Tuesday.opening + " Closing - " + data[currentValue].hours.Tuesday.closing + "</li>" +
-                            "<li>Wednesday: Opening - " + data[currentValue].hours.Wednesday.opening + " Closing - " + data[currentValue].hours.Wednesday.closing + "</li>" +
-                            "<li>Thursday: Opening - " + data[currentValue].hours.Thursday.opening + " Closing - " + data[currentValue].hours.Thursday.closing + "</li>" +
-                            "<li>Friday: Opening - " + data[currentValue].hours.Friday.opening + " Closing - " + data[currentValue].hours.Friday.closing + "</li>" +
-                            "<li>Saturday: Opening - " + data[currentValue].hours.Saturday.opening + " Closing - " + data[currentValue].hours.Saturday.closing + "</li>" +
-                            "<li>Sunday: Opening - " + data[currentValue].hours.Sunday.opening + " Closing - " + data[currentValue].hours.Sunday.closing + "</li>" +
+                            "<li>Monday: " + (typeof data[currentValue].hours.Monday == "object" ? "Opening - " + data[currentValue].hours.Monday.opening + " Closing - " + data[currentValue].hours.Monday.closing : "CLOSED") + "</li>" +
+                            "<li>Tuesday: " + (typeof data[currentValue].hours.Tuesday == "object" ? "Opening - " + data[currentValue].hours.Tuesday.opening + " Closing - " + data[currentValue].hours.Tuesday.closing : "CLOSED") + "</li>" +
+                            "<li>Wednesday: " + (typeof data[currentValue].hours.Wednesday == "object" ? "Opening - " + data[currentValue].hours.Wednesday.opening + " Closing - " + data[currentValue].hours.Wednesday.closing : "CLOSED") + "</li>" +
+                            "<li>Thursday: " + (typeof data[currentValue].hours.Thursday == "object" ? "Opening - " + data[currentValue].hours.Thursday.opening + " Closing - " + data[currentValue].hours.Thursday.closing : "CLOSED") + "</li>" +
+                            "<li>Friday: " + (typeof data[currentValue].hours.Friday == "object" ? "Opening - " + data[currentValue].hours.Friday.opening + " Closing - " + data[currentValue].hours.Friday.closing : "CLOSED") + "</li>" +
+                            "<li>Saturday: " + (typeof data[currentValue].hours.Saturday == "object" ? "Opening - " + data[currentValue].hours.Saturday.opening + " Closing - " + data[currentValue].hours.Saturday.closing : "CLOSED") + "</li>" +
+                            "<li>Sunday: " + (typeof data[currentValue].hours.Sunday == "object" ? "Opening - " + data[currentValue].hours.Sunday.opening + " Closing - " + data[currentValue].hours.Sunday.closing : "CLOSED") + "</li>" +
                         "</ul>" +
                     "</li>" +
                     "<li>Wheelchair: " + (data[currentValue].accessibility.wheelchair ? "Yes" : "No") + "</li>" +
@@ -48,6 +48,9 @@ $(document).ready(function(){
             $(this).find(".branchDetail").toggle();
         })
 
+        /**total branches visible at the beginning**/
+        var numberVisible = $(".branches .branch:visible").length;
+        $(".number-visible").html(numberVisible);
 
         /**filters**/
         $("#filter :checkbox").click(function () {
@@ -55,19 +58,16 @@ $(document).ready(function(){
             if($(this).is(":checked")){
                 /*$(".branches").removeClass(value + "-hide");*/
                 $(".branches").addClass(value + "-show");
+                numberVisible = $(".branches .branch:visible").length;
+                $(".number-visible").html(numberVisible);
             } else {
                 /*$(".branches").addClass(value + "-hide");*/
                 $(".branches").removeClass(value + "-show");
+                numberVisible = $(".branches .branch:visible").length;
+                $(".number-visible").html(numberVisible);
             }
         });
-
-        $.each(data, function(index, branch){
-            if (typeof branch.hours.Monday == "object"){
-                console.log("it is an object");
-            }
-
-        })
-
+        
     }).success(function() {
         console.log("Successfully retrieved data.");
     }).error(function() {
