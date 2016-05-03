@@ -36,7 +36,7 @@ $(document).ready(function(){
                     "<li>Wireless: " + (data[currentValue].accessibility.wireless ? "Yes" : "No") + "</li>" +
                     "<li>Telephone: " + data[currentValue].phone_number + "</li>" +
                     "<li>URL: <a href='" + data[currentValue].url + "'target='_blank'>" + data[currentValue].url + "</a></li>" +
-                    "<iframe src='https://www.google.com/maps/embed/v1/search?key=AIzaSyD8JkXN_0TRxUoKqAQEpBLY-ScaD0FaRxg&q=" + data[currentValue].address[0] + "'></iframe>" +
+                    "<iframe src='https://www.google.com/maps/embed/v1/search?key=AIzaSyD8JkXN_0TRxUoKqAQEpBLY-ScaD0FaRxg&q=" + data[currentValue].address[0] + " " + data[currentValue].address[1] + "'></iframe>" +
                 "</ul>" +
                 "</li>";
         }, "");
