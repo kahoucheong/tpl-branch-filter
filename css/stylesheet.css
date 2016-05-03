@@ -36,6 +36,16 @@ h2{
     border-left: 3px solid #FE4365;
     padding-left: 30px;
 }
+iframe{
+    width: 425px;
+    height: 350px;
+}
+@media screen and (max-width: 435px){
+    iframe{
+        width: 240px;
+        height: 240px;
+    }
+}
 
 /**filter css**/
 .branches.wheelchair-show .wheelchair-no {
