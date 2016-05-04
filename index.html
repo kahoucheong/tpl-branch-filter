@@ -1,40 +1,113 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <title>Tpl-branch-filter by kahoucheong</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Tpl-branch-filter</h1>
-      <h2 class="project-tagline"></h2>
-      <a href="https://github.com/kahoucheong/tpl-branch-filter" class="btn">View on GitHub</a>
-      <a href="https://github.com/kahoucheong/tpl-branch-filter/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/kahoucheong/tpl-branch-filter/tarball/master" class="btn">Download .tar.gz</a>
+    <meta name="description" content="Toronto Public Library Branch Filter">
+    <meta name="author" content="Ka Hou (Michael) Cheong">
+    <title>Toronto Public Library Branch Filter</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Lato|Open+Sans|Roboto" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+</head>
+<body>
+    <section class="header">
+        <div class="container">
+            <div class="row">
+                <h1>Toronto Public Library Branch Filter <i class="fa fa-filter" aria-hidden="true"></i></h1>
+                <h2>
+                    <i class="fa fa-arrow-down" aria-hidden="true"></i> Select Your Options <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                </h2>
+
+                <div class="row">
+                    <div id="filter">
+                        <div class="col-md-3">
+                            <h4>Accessibility:</h4>
+                            <div class="onoffswitch">
+                                <input type="checkbox" name="Wheelchair" class="onoffswitch-checkbox" id="wheelchair" value="wheelchair">
+                                <label class="onoffswitch-label" for="wheelchair"></label>
+                                <i class="fa fa-wheelchair" aria-hidden="true"><span>Wheelchair</span></i>
+                            </div>
+                            <div class="onoffswitch">
+                                <input type="checkbox" name="Wireless" class="onoffswitch-checkbox" id="wireless" value="wireless">
+                                <label class="onoffswitch-label" for="wireless"></label>
+                                <i class="fa fa-wifi" aria-hidden="true"><span>Wireless</span></i>
+                            </div>
+                            <!--<input type="checkbox" name="Wheelchair" value="wheelchair"> Wheelchair
+                            <input type="checkbox" name="Wireless" value="wireless"> Wireless-->
+                        </div>
+
+                        <div class="col-md-9">
+                            <h4>Opening days:</h4>
+                            <div class="onoffswitch">
+                                <input type="checkbox" name="Monday" class="onoffswitch-checkbox" id="monday" value="monday">
+                                <label class="onoffswitch-label" for="monday"></label>
+                                <span>Monday</span>
+                            </div>
+                            <div class="onoffswitch">
+                                <input type="checkbox" name="Tuesday" class="onoffswitch-checkbox" id="tuesday" value="tuesday">
+                                <label class="onoffswitch-label" for="tuesday"></label>
+                                <span>Tuesday</span>
+                            </div>
+                            <div class="onoffswitch">
+                                <input type="checkbox" name="Wednesday" class="onoffswitch-checkbox" id="wednesday" value="wednesday">
+                                <label class="onoffswitch-label" for="wednesday"></label>
+                                <span>Wednesday</span>
+                            </div>
+                            <div class="onoffswitch">
+                                <input type="checkbox" name="Thursday" class="onoffswitch-checkbox" id="thursday" value="thursday">
+                                <label class="onoffswitch-label" for="thursday"></label>
+                                <span>Thursday</span>
+                            </div>
+                            <div class="onoffswitch">
+                                <input type="checkbox" name="Friday" class="onoffswitch-checkbox" id="friday" value="friday">
+                                <label class="onoffswitch-label" for="friday"></label>
+                                <span>Friday</span>
+                            </div>
+                            <div class="onoffswitch">
+                                <input type="checkbox" name="Saturday" class="onoffswitch-checkbox" id="saturday" value="saturday">
+                                <label class="onoffswitch-label" for="saturday"></label>
+                                <span>Saturday</span>
+                            </div>
+                            <div class="onoffswitch">
+                                <input type="checkbox" name="Sunday" class="onoffswitch-checkbox" id="sunday" value="sunday">
+                                <label class="onoffswitch-label" for="sunday"></label>
+                                <span>Sunday</span>
+                            </div>
+                            <!--<input type="checkbox" name="Monday" value="monday"> Monday
+                            <input type="checkbox" name="Tuesday" value="tuesday"> Tuesday
+                            <input type="checkbox" name="Wednesday" value="wednesday"> Wednesday
+                            <input type="checkbox" name="Thursday" value="thursday"> Thursday
+                            <input type="checkbox" name="Friday" value="friday"> Friday
+                            <input type="checkbox" name="Saturday" value="saturday"> Saturday
+                            <input type="checkbox" name="Sunday" value="sunday"> Sunday-->
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
     </section>
 
-    <section class="main-content">
-      <h1>
-<a id="-tpl-branch-filter" class="anchor" href="#-tpl-branch-filter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a># tpl-branch-filter</h1>
+    <br>
 
-<p>Toronto Public Library Branch Filter.</p>
-
-<p>It is a library filter which can filter libraries that have wheelchair accessibility, wireless WiFi, and operation days for the week.
-It will also list out the details for each branch too.</p>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/kahoucheong/tpl-branch-filter">Tpl-branch-filter</a> is maintained by <a href="https://github.com/kahoucheong">kahoucheong</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
+    <section class="details">
+        <div class="container">
+            <div class="row">
+                <p class="number-branches">Number of branches: <span class="number-visible"></span></p>
+            </div>
+            <div class="row">
+                <ul class="branches"></ul>
+            </div>
+        </div>
     </section>
 
-  
-  </body>
+    <!--JavaScripts-->
+    <script src="js/jquery-1.12.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/function.js"></script>
+</body>
 </html>
