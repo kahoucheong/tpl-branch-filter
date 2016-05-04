@@ -1,0 +1,6 @@
+{
+  "name": "Tpl-branch-filter",
+  "tagline": "",
+  "body": "# # tpl-branch-filter\r\n\r\nToronto Public Library Branch Filter.\r\n\r\nIt is a library filter which can filter libraries that have wheelchair accessibility, wireless WiFi, and operation days for the week.\r\nIt will also list out the details for each branch too.\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
