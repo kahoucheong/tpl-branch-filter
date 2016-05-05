@@ -7,29 +7,31 @@ $(document).ready(function(){
         var branches = Object.keys(data);
 
         /**adding branch markers on map**/
-        $.each(data, function(key, branch) {
-            console.log(branch.address[0]);
+        setTimeout(function(){
+            $.each(data, function(key, branch) {
+                console.log(branch.address[0]);
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({'address': branch.address[0]}, function(results, status) {
+                    console.log(results);
 
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({'address': branch.address[0]}, function(results, status) {
-                console.log(results);
-
-                if (status === google.maps.GeocoderStatus.OK) {
-                    var marker = new google.maps.Marker({
-                        position: results[0].geometry.location
-                    });
-                    marker.setMap(map);
-                    var infowindow = new google.maps.InfoWindow({
-                        content: "<strong>" + branch.name + ":</strong>" + " " + branch.address[0]
-                    });
-                    marker.addListener('click', function () {
-                        infowindow.open(map, marker);
-                    })
-                } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
-                }
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        var marker = new google.maps.Marker({
+                            position: results[0].geometry.location
+                        });
+                        marker.setMap(map);
+                        var infowindow = new google.maps.InfoWindow({
+                            content: "<strong>" + branch.name + ":</strong>" + " " + branch.address[0]
+                        });
+                        marker.addListener('click', function () {
+                            infowindow.open(map, marker);
+                        })
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
             });
-        });
+        }, 1000);
+        
 
         var listing = branches.reduce(function(previousValue, currentValue, currentIndex, array){
 
