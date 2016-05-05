@@ -23,6 +23,9 @@ h2{
 
 
 /**branches info**/
+#map{
+    height: 300px;
+}
 .number-branches{
     font-size: 20px;
 }

@@ -6,6 +6,31 @@ $(document).ready(function(){
 
         var branches = Object.keys(data);
 
+        /**adding branch markers on map**/
+        $.each(data, function(key, branch) {
+            console.log(branch.address[0]);
+
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({'address': branch.address[0]}, function(results, status) {
+                console.log(results);
+
+                if (status === google.maps.GeocoderStatus.OK) {
+                    var marker = new google.maps.Marker({
+                        position: results[0].geometry.location
+                    });
+                    marker.setMap(map);
+                    var infowindow = new google.maps.InfoWindow({
+                        content: "<strong>" + branch.name + ":</strong>" + " " + branch.address[0]
+                    });
+                    marker.addListener('click', function () {
+                        infowindow.open(map, marker);
+                    })
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        });
+
         var listing = branches.reduce(function(previousValue, currentValue, currentIndex, array){
 
             var branchClasses = "branch";
@@ -36,7 +61,7 @@ $(document).ready(function(){
                     "<li>Wireless: " + (data[currentValue].accessibility.wireless ? "Yes" : "No") + "</li>" +
                     "<li>Telephone: " + data[currentValue].phone_number + "</li>" +
                     "<li>URL: <a href='" + data[currentValue].url + "'target='_blank'>" + data[currentValue].url + "</a></li>" +
-                    "<iframe src='https://www.google.com/maps/embed/v1/search?key=AIzaSyD8JkXN_0TRxUoKqAQEpBLY-ScaD0FaRxg&q=" + data[currentValue].address[0] + " " + data[currentValue].address[1] + "'></iframe>" +
+                    /**"<iframe src='https://www.google.com/maps/embed/v1/search?key=AIzaSyD8JkXN_0TRxUoKqAQEpBLY-ScaD0FaRxg&q=" + data[currentValue].address[0] + " " + data[currentValue].address[1] + "'></iframe>" +**/
                 "</ul>" +
                 "</li>";
         }, "");
@@ -75,5 +100,38 @@ $(document).ready(function(){
         console.log("Service Unavailable.");
     });
 
-
 })
+
+var map;
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10
+    });
+
+    /**Geolocation of the user**/
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            map.setCenter(pos);
+        })
+    } else {
+        // Browser doesn't support Geolocation
+        console.log("Geolocation not supported");
+    }
+
+    /**var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': "15 Deepdale Drive, Toronto, ON"}, function(results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+            var marker = new google.maps.Marker({
+                position: results[0].geometry.location
+            });
+            marker.setMap(map);
+            map.setCenter(marker.getPosition());
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });**/
+};
