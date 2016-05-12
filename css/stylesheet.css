@@ -22,11 +22,11 @@ h2{
         margin-right: 10px;
     }
 }
+
+/**branches info**/
 #views{
     float: right;
 }
-
-/**branches info**/
 #map{
     height: 300px;
 }
