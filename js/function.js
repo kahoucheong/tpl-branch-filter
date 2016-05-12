@@ -5,6 +5,7 @@ $(document).ready(function(){
         console.log(numBranches);
 
         var branches = Object.keys(data);
+        var markers = {};
 
         var listing = branches.reduce(function(previousValue, currentValue, currentIndex, array){
 
@@ -19,7 +20,7 @@ $(document).ready(function(){
             branchClasses += (typeof data[currentValue].hours.Saturday == "object") ? " saturday-open" : " saturday-close";
             branchClasses += (typeof data[currentValue].hours.Sunday == "object") ? " sunday-open" : " sunday-close";
 
-            return previousValue + "<li class='" + branchClasses + "'>" + currentValue + " - <em>" + data[currentValue].address[0] + "</em>" +
+            return previousValue + "<li data-branchname='"+ currentValue + "' class='" + branchClasses + "'>" + currentValue + " - <em>" + data[currentValue].address[0] + "</em>" +
                 "<ul class='branchDetail'>" +
                     "<li class='hours'> Hours: - " + "Note: " + (data[currentValue].hours.note != null ? data[currentValue].hours.note : "N/A") +
                         "<ul>" +
@@ -59,22 +60,31 @@ $(document).ready(function(){
             if($(this).is(":checked")){
                 /*$(".branches").removeClass(value + "-hide");*/
                 $(".branches").addClass(value + "-show");
-                numberVisible = $(".branches .branch:visible").length;
-                $(".number-visible").html(numberVisible);
             } else {
                 /*$(".branches").addClass(value + "-hide");*/
                 $(".branches").removeClass(value + "-show");
-                numberVisible = $(".branches .branch:visible").length;
-                $(".number-visible").html(numberVisible);
             }
+            numberVisible = $(".branches .branch:visible").length;
+            $(".number-visible").html(numberVisible);
+
+            $.each(markers, function(key, marker){
+                marker.setVisible(false);
+            });
+            $(".branch:visible").each(function(){
+                var element = $(this);
+                var branchname = element.data("branchname");
+                markers[branchname].setVisible(true);
+            });
         });
 
         /**adding branch markers on map**/
         $.each(data, function(key, branch) {
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(branch.coordinates.latitude, branch.coordinates.longitude)
+                position: new google.maps.LatLng(branch.coordinates.latitude, branch.coordinates.longitude),
+                branch: branch
             });
             marker.setMap(map);
+            markers[branch.name] = marker;
 
             var infowindow = new google.maps.InfoWindow({
                 content: "<strong>" + branch.name + ":</strong>" + " " + branch.address[0]
