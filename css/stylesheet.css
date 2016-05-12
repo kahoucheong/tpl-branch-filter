@@ -16,12 +16,15 @@ h2{
 }
 @media screen and (max-width: 768px){
     .header .container,
+    .view-selection .container,
     .details .container{
         margin-left: 10px;
         margin-right: 10px;
     }
 }
-
+#views{
+    float: right;
+}
 
 /**branches info**/
 #map{

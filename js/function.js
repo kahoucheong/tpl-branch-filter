@@ -134,3 +134,21 @@ function initMap() {
         }
     });
 };
+
+var viewSelector = function(view){
+    $("#map").hide();
+    $(".number-branches").hide();
+    $(".branches").hide();
+    if(view == "map-view"){
+        $("#map").css("height", "500px");
+        $("#map").show();
+    } else if(view == "list-view"){
+        $(".number-branches").show();
+        $(".branches").show();
+    } else{
+        $("#map").css("height", "300px");
+        $("#map").show();
+        $(".number-branches").show();
+        $(".branches").show();
+    }
+};
