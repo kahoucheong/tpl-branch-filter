@@ -4,10 +4,12 @@ $(document).ready(function(){
         var numBranches = Object.keys(data).length;
         console.log(numBranches);
 
-        var branches = Object.keys(data);
+        var infowindow = new google.maps.InfoWindow();
         var markers = {};
+        var branches = {};
 
-        var listing = branches.reduce(function(previousValue, currentValue, currentIndex, array){
+        var branches2 = Object.keys(data);
+        var listing = branches2.reduce(function(previousValue, currentValue, currentIndex, array){
 
             var branchClasses = "branch";
             branchClasses += data[currentValue].accessibility.wheelchair ? " wheelchair-yes" : " wheelchair-no";
@@ -41,14 +43,13 @@ $(document).ready(function(){
                 "</ul>" +
                 "</li>";
         }, "");
-
         $(".branches").html(listing);
 
         /**toggle the branch info**/
         $(".branchDetail").hide();
         $(".branch").click(function(){
             $(this).find(".branchDetail").toggle();
-        })
+        });
 
         /**total branches visible at the beginning**/
         var numberVisible = $(".branches .branch:visible").length;
@@ -77,21 +78,58 @@ $(document).ready(function(){
             });
         });
 
-        /**adding branch markers on map**/
+        /**adding branch markers on map, and create markers and branches objects**/
         $.each(data, function(key, branch) {
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(branch.coordinates.latitude, branch.coordinates.longitude),
                 branch: branch
             });
             marker.setMap(map);
-            markers[branch.name] = marker;
 
-            var infowindow = new google.maps.InfoWindow({
-                content: "<strong>" + branch.name + ":</strong>" + " " + branch.address[0]
-            });
-            marker.addListener('click', function () {
+            var infowindowHTML  = "<strong>" + branch.name + "</strong>" + " - <em>" + branch.address[0] + "</em>" +
+                "<br>" +
+                "<ul>" +
+                    "<li>Hours: - Note: " + (branch.hours.note != null ? branch.hours.note : "N/A") + "</li>" +
+                    "<ul>" +
+                        "<li>Monday: " + (typeof branch.hours.Monday == "object" ? "Opening - " + branch.hours.Monday.opening + " Closing - " + branch.hours.Monday.closing : "CLOSED") + "</li>" +
+                        "<li>Tuesday: " + (typeof branch.hours.Tuesday == "object" ? "Opening - " + branch.hours.Tuesday.opening + " Closing - " + branch.hours.Tuesday.closing : "CLOSED") + "</li>" +
+                        "<li>Wednesday: " + (typeof branch.hours.Wednesday == "object" ? "Opening - " + branch.hours.Wednesday.opening + " Closing - " + branch.hours.Wednesday.closing : "CLOSED") + "</li>" +
+                        "<li>Thursday: " + (typeof branch.hours.Thursday == "object" ? "Opening - " + branch.hours.Thursday.opening + " Closing - " + branch.hours.Thursday.closing : "CLOSED") + "</li>" +
+                        "<li>Friday: " + (typeof branch.hours.Friday == "object" ? "Opening - " + branch.hours.Friday.opening + " Closing - " + branch.hours.Friday.closing : "CLOSED") + "</li>" +
+                        "<li>Saturday: " + (typeof branch.hours.Saturday == "object" ? "Opening - " + branch.hours.Saturday.opening + " Closing - " + branch.hours.Saturday.closing : "CLOSED") + "</li>" +
+                        "<li>Sunday: " + (typeof branch.hours.Sunday == "object" ? "Opening - " + branch.hours.Sunday.opening + " Closing - " + branch.hours.Sunday.closing : "CLOSED") + "</li>" +
+                "</ul>";
+
+            marker.addListener("click", function(){
+                infowindow.close();
+                infowindow.setContent(infowindowHTML);
                 infowindow.open(map, marker);
             })
+
+            markers[branch.name] = marker;
+
+            branches[branch.name] = {};
+            branches[branch.name]["marker"] = marker;
+            branches[branch.name]["data"] = branch;
+            branches[branch.name]["element"] = "<li data-branchname='"+ branch.name + "'>" + branch.name + " - <em>" + branch.address[0] + "</em>" +
+                "<ul class='branchDetail'>" +
+                "<li class='hours'> Hours: - " + "Note: " + (branch.hours.note != null ? branch.hours.note : "N/A") +
+                    "<ul>" +
+                    "<li>Monday: " + (typeof branch.hours.Monday == "object" ? "Opening - " + branch.hours.Monday.opening + " Closing - " + branch.hours.Monday.closing : "CLOSED") + "</li>" +
+                    "<li>Tuesday: " + (typeof branch.hours.Tuesday == "object" ? "Opening - " + branch.hours.Tuesday.opening + " Closing - " + branch.hours.Tuesday.closing : "CLOSED") + "</li>" +
+                    "<li>Wednesday: " + (typeof branch.hours.Wednesday == "object" ? "Opening - " + branch.hours.Wednesday.opening + " Closing - " + branch.hours.Wednesday.closing : "CLOSED") + "</li>" +
+                    "<li>Thursday: " + (typeof branch.hours.Thursday == "object" ? "Opening - " + branch.hours.Thursday.opening + " Closing - " + branch.hours.Thursday.closing : "CLOSED") + "</li>" +
+                    "<li>Friday: " + (typeof branch.hours.Friday == "object" ? "Opening - " + branch.hours.Friday.opening + " Closing - " + branch.hours.Friday.closing : "CLOSED") + "</li>" +
+                    "<li>Saturday: " + (typeof branch.hours.Saturday == "object" ? "Opening - " + branch.hours.Saturday.opening + " Closing - " + branch.hours.Saturday.closing : "CLOSED") + "</li>" +
+                    "<li>Sunday: " + (typeof branch.hours.Sunday == "object" ? "Opening - " + branch.hours.Sunday.opening + " Closing - " + branch.hours.Sunday.closing : "CLOSED") + "</li>" +
+                    "</ul>" +
+                    "</li>" +
+                    "<li>Wheelchair: " + (branch.accessibility.wheelchair ? "Yes" : "No") + "</li>" +
+                    "<li>Wireless: " + (branch.accessibility.wireless ? "Yes" : "No") + "</li>" +
+                    "<li>Telephone: " + branch.phone_number + "</li>" +
+                    "<li>URL: <a href='" + branch.url + "'target='_blank'>" + branch.url + "</a></li>" +
+                    "</ul>" +
+                "</li>";
         });
 
     }).success(function() {
