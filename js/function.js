@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $.getJSON('http://api.tpl.davidchchang.com/branches', function(data) {
+        var data = data;
         var markers = [];
         var branches = {};
         var allBranches = Object.keys(data);
@@ -73,33 +74,31 @@ $(document).ready(function(){
         $(".number-visible").html(numberVisible);
 
         /**filters**/
-        $("#filter :checkbox").click(function () {
+        $("#filter").find(":checkbox").click(function () {
             $(".branch").hide();
             $.each(markers, function(key, marker){
                 marker.setVisible(false);
             });
 
-            var filtersArray = $("#filter");
-            console.log(filtersArray);
-
+            var filtersArray = $("#filter").find("input").toArray();
             var filteredResults = filtersArray.reduce(function(previousResults, currentElement, currentIndex, array){
-                return function(){
-                    var $filter = array[currentIndex];
-                    console.log($filter);
-                    var testFn = $filter.data("test-condition");
-                    var results = [];
+                var $filter = $(currentElement);
+                var testFn = $filter.data("test-condition");
+                var results = {};
 
-                    for (var i = 0; i < previousResults.length; i++){
-                        var branch = previousResults[i];
-                        if(!$filter.is(":checked") || eval(testFn)){
-                            results += branch;
-                        }
+                $.each(previousResults, function(key, branch){
+                    if(!$filter.is(":checked") || eval(testFn)){
+                        results[key] = branch;
                     }
-                    return results;
-                }();
-            }, allBranches);
+                });
+                return results;
+            }, branches);
 
-            console.log(filteredResults);
+            $.each(filteredResults, function(key, branch){
+                branch["element"].show();
+                branch["marker"].setVisible(true);
+            });
+
         });
 
 
