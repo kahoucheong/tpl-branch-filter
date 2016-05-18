@@ -3,7 +3,6 @@ $(document).ready(function(){
         var data = data;
         var markers = [];
         var branches = {};
-        var allBranches = Object.keys(data);
         var infowindow = new google.maps.InfoWindow();
 
         /**adding branch markers on map, and create markers , branches data and element into an object**/
@@ -79,6 +78,7 @@ $(document).ready(function(){
             $.each(markers, function(key, marker){
                 marker.setVisible(false);
             });
+            var count = 0;
 
             var filtersArray = $("#filter").find("input").toArray();
             var filteredResults = filtersArray.reduce(function(previousResults, currentElement, currentIndex, array){
@@ -97,13 +97,13 @@ $(document).ready(function(){
             $.each(filteredResults, function(key, branch){
                 branch["element"].show();
                 branch["marker"].setVisible(true);
+                count++;
             });
 
+            numberVisible = count;
+            $(".number-visible").html(numberVisible);
         });
-
-
-
-
+        
     }).success(function() {
         console.log("Successfully retrieved data.");
     }).error(function() {
@@ -146,19 +146,20 @@ function initMap() {
 };
 
 var viewSelector = function(view){
-    $("#map").hide();
     $(".number-branches").hide();
+    $("#map").hide();
     $(".branches").hide();
     if(view == "map-view"){
+        $(".number-branches").show();
         $("#map").css("height", "500px");
         $("#map").show();
     } else if(view == "list-view"){
         $(".number-branches").show();
         $(".branches").show();
     } else{
+        $(".number-branches").show();
         $("#map").css("height", "300px");
         $("#map").show();
-        $(".number-branches").show();
         $(".branches").show();
     }
 };
